@@ -11,7 +11,8 @@ module Geocoder::Lookup
     private
 
     def base_query_url(query)
-      "#{protocol}://ws.geonorge.no/adresser/v1/sok?#{query}"
+      text = query.sanitized_text
+      "#{protocol}://ws.geonorge.no/adresser/v1/sok?"
     end
 
     def results(query)
@@ -19,6 +20,12 @@ module Geocoder::Lookup
       return [] unless doc['adresser'] || doc['adresser'].present?
 
       doc['adresser']
+    end
+
+    def query_url_params(query)
+      {
+        sok: query.sanitized_text
+      }.merge(super)
     end
 
   end

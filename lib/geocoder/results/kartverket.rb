@@ -4,14 +4,14 @@ module Geocoder::Result
   class Kartverket < Base
 
     def coordinates
-      [data["representasjonspunkt"]["lat"].to_f, data["representasjonspunkt"]["long"].to_f]
+      [data["representasjonspunkt"]["lat"].to_f, data["representasjonspunkt"]["lon"].to_f]
     end
 
     def street
-      data["adressenavn"]
+      data["adressetekst"]
     end
 
-    def city
+    def place
       data["poststed"]
     end
 
